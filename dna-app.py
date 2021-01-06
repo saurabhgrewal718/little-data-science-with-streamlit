@@ -57,7 +57,33 @@ X_values = list(X.values())
 
 X
 
+#printing the text
+st.subheader('2. Print Text')
+st.write('there are '+ str(X['A'])+ ' adenine (A)')
+st.write('there are '+ str(X['T'])+ ' thymine (T)')
+st.write('there are '+ str(X['G'])+ ' guanine (G)')
+st.write('there are '+ str(X['C'])+ ' cytosine (C)')
 
+
+# display data frame
+st.subheader('3. Display DataFrame')
+df = pd.DataFrame.from_dict(X,orient = 'index')
+df = df.rename({0:'Count'},axis='columns')
+df.reset_index(inplace=True)
+df = df.rename(columns={'index':'Nucleotide'})
+st.write(df)
+
+
+# display bar chart sing the data frame crearted in the above one using the altiar lib(charts)
+st.subheader('3. Display Bar Chart')
+p = alt.Chart(df).mark_bar().encode(
+    x='Nucleotide',
+    y='Count',
+)
+p= p.properties(
+    width = alt.Step(80)#width of the bar chart bars
+)
+st.write(p)
 
 
 
